@@ -1,5 +1,6 @@
-const { application } = require("express");
+
 const jwt = require("jsonwebtoken");
+const { SignupModel } = require("../models/signup.models");
 const Authentication = (req, res, next) => {
   if (!req.headers.authorization) {
     return res.send("please login again");
@@ -21,7 +22,7 @@ const authorisation = (permittedrole) => {
   return async (req, res, next) => 
   {
   const email = req.body.email
-  const user = await UserModel.findOne({email : email})
+  const user = await SignupModel.findOne({email : email})
   const role = user.role;
 
       if(permittedrole.includes(role)){
